@@ -12,7 +12,7 @@ def main():
         print("  2\tDelhi (DEL) to Nainital (NAI)")
         print("  3\tDelhi (DEL) to Chandigarh (CHA)")
         print("-" * 40)
-        print("\nPlease select one of the below option to proceed...")
+        print("\nPlease select one of the below option to proceed:")
         print("1. Make a Reservation")
         print("2. Query Reservations")
         print("3. Exit")
