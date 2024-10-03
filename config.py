@@ -1,7 +1,7 @@
 DATABASE_CONFIG = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'your_password',
+    'password': 'Shakki03',
     'database': 'bus_reservation_system'
 }
 
