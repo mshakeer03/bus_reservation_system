@@ -4,9 +4,9 @@ from config import BUS_INFO
 
 def main():
     while True:
-        print("#" * 40)
-        print("### Travel Agency Reservation System ###")
-        print("#" * 40)
+        print("#" * 44)
+        print("### Travel Agency Bus Reservation System ###")
+        print("#" * 44)
         print("Bus No\t\tRoute")
         print("-" * 40)
         print("  1\tDelhi (DEL) to Jaipur (JAI)")
