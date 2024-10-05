@@ -1,11 +1,12 @@
-from reservation.reservation import make_reservation, query_reservations, cancel_reservation
+from reservation.reservation import make_reservation, query_reservation, cancel_reservation
 from reservation.validation import validate_date
 from config import BUS_INFO
 
 def main():
     while True:
-        print("\n--- Travel Agency Reservation System ---")
-        print("-" * 40)
+        print("#" * 40)
+        print("### Travel Agency Reservation System ###")
+        print("#" * 40)
         print("Bus No\t\tRoute")
         print("-" * 40)
         print("  1\tDelhi (DEL) to Jaipur (JAI)")
@@ -54,7 +55,7 @@ def main():
                 is_valid, formatted_date = validate_date(date)
 
             # Use formatted_date (in 'YYYY-MM-DD' format)
-            query_reservations(bus_no, formatted_date)
+            query_reservation(bus_no, formatted_date)
 
         elif choice == '3':
             print("Cancel a Reservation")

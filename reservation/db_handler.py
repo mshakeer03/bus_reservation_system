@@ -36,7 +36,7 @@ def is_ticket_number_unique(ticket_number):
     return result == 0  # True if the ticket number is unique
 
 # Function to query reservations for a specific bus on a specific date
-def query_reservations_sp_sd(bus_no, reservation_date):
+def query_reservation_sb_sd(bus_no, reservation_date):
     conn = get_db_connection()
     cursor = conn.cursor()
     query = """
@@ -81,11 +81,31 @@ def is_number_passengers_exceeds_free_seats(bus_no, reservation_date, num_passen
 def delete_reservation(bus_no, reservation_date, seat_no):
     conn = get_db_connection()
     cursor = conn.cursor()
-    query = """
+
+    # Check if the reservation exists before trying to delete
+    query_check = """
+        SELECT COUNT(*) FROM reservations
+        WHERE bus_no = %s AND reservation_date = %s AND seat_no = %s
+    """
+    cursor.execute(query_check, (bus_no, reservation_date, seat_no))
+    count = cursor.fetchone()[0]
+
+    if count == 0:
+        cursor.close()
+        conn.close()
+        return False  # Reservation does not exist
+
+    # Proceed with the deletion if reservation exists
+    query_delete = """
         DELETE FROM reservations
         WHERE bus_no = %s AND reservation_date = %s AND seat_no = %s
     """
-    cursor.execute(query, (bus_no, reservation_date, seat_no))
+    cursor.execute(query_delete, (bus_no, reservation_date, seat_no))
     conn.commit()
+
+    # Return True if the deletion was successful
+    success = cursor.rowcount > 0
+
     cursor.close()
     conn.close()
+    return success

@@ -26,7 +26,7 @@ def make_reservation(bus_no, date):
     print_reservation_ticket(bus_no, date, seat_no, name, gender, age, BUS_INFO[bus_no]['depart'], BUS_INFO[bus_no]['arrive'], fare)
 
 # Query Reservation Logic
-def query_reservations(bus_no, date):
+def query_reservation(bus_no, date):
     filename = open_bus_file(bus_no, date)
 
     with open(filename, 'r') as f:

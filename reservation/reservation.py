@@ -1,19 +1,13 @@
 import random
 from reservation.db_handler import insert_reservation
-from reservation.db_handler import query_reservations_sp_sd
+from reservation.db_handler import query_reservation_sb_sd
 from reservation.db_handler import is_preffered_seat_available
 from reservation.db_handler import is_number_passengers_exceeds_free_seats
 from reservation.db_handler import delete_reservation
-from reservation.db_handler import is_ticket_number_unique
+from util.utils import generate_unique_ticket_number
 from config import BUS_INFO
 from datetime import datetime
 
-# Generate a unique 5-digit ticket number
-def generate_unique_ticket_number():
-    while True:
-        ticket_number = random.randint(10000, 99999)  # Generate 5-digit number
-        if is_ticket_number_unique(ticket_number):  # Check if the ticket number is unique
-            return ticket_number
 
 # Make Reservation Logic
 def make_reservation(bus_no, date, num_passengers, route, fare, depart_time, arrival_time):
@@ -69,34 +63,44 @@ def make_reservation(bus_no, date, num_passengers, route, fare, depart_time, arr
     print_reservation_ticket(ticket_number, bus_no, date, reservations, depart_time, arrival_time, route)
 
 # Query Reservation Logic
-def query_reservations(bus_no, date):
+def query_reservation(bus_no, date):
+    print("-" * 50)
     print(f"\nBus No: {bus_no}\tDate of Journey: {date}")
+    print(f"Departure Time: {BUS_INFO[bus_no]['depart']}\tArrival Time: {BUS_INFO[bus_no]['arrive']}")
     print(f"Route: {BUS_INFO[bus_no]['route']}")
     print("-" * 50)
-    print("Seat No\tName\tAge\tGender\tFare")
+    print("Seat No\tName\tAge\tGender\t\tFare")
     print("-" * 50)
 
-    reservations = query_reservations_sp_sd(bus_no, date)
-
+    reservations = query_reservation_sb_sd(bus_no, date)
+    total_fare = 0
     for res in reservations:
         seat_no, name, gender, age, fare = res
-        print(f"{seat_no}\t{name}\t{age}\t{gender}\t{fare}")
+        print(f"{seat_no}\t{name}\t{age}\t{gender}\t\t{fare}")
+        total_fare += fare
 
     print("-" * 50)
-    print(f"Total Reservations: {len(reservations)}")
-    print
+    print(f"Total Reservations: {len(reservations)}\t\tTotal Fare: {total_fare}")
+    print("-" * 50)
 
 # Is reservation full
 def is_reservation_full(bus_no, date):
-    reservations = query_reservations_sp_sd(bus_no, date)
+    reservations = query_reservation_sb_sd(bus_no, date)
     return len(reservations) == 40
 
 # Reservation Cancellation Logic
 def cancel_reservation(bus_no, date, seat_no):
     print("-" * 80)
-    print(f"Canceling reservation for seat {seat_no} on Bus {bus_no} on {date}.")
-    delete_reservation(bus_no, date, seat_no)
-    print(f"Reservation canceled successfully!")
+    print(f"Attempting to cancel reservation for seat {seat_no} on Bus {bus_no} on {date}.")
+
+    # Attempt to cancel the reservation
+    success = delete_reservation(bus_no, date, seat_no)
+
+    if success:
+        print(f"Reservation for seat {seat_no} on Bus {bus_no} on {date} canceled successfully!")
+    else:
+        print(f"No reservation found for seat {seat_no} on Bus {bus_no} on {date}. Unable to cancel.")
+
     print("-" * 80)
 
 # Print Ticket (Modified to handle multiple passengers)

@@ -9,6 +9,11 @@ This project is a command-line-based **Online Bus Reservation System** where use
 - **Ticket Generation**: Generates a reservation ticket containing passenger details, seat number, departure time, and fare.
 - **Database Integration**: Stores reservation information in a MySQL database.
 - **Unique Ticket Number**: Generates a unique 5-digit ticket number for each reservation.
+- **Seat Availability**: Checks seat availability before making a reservation.
+- **Cancel Reservation**: Allows users to cancel a reservation by providing the ticket number.
+- **Fare Calculation**: Calculates the fare based on the passenger's age and the bus route.
+- **Data Validation**: Validates user inputs to ensure correct data entry.
+- **Error Handling**: Provides error messages for invalid inputs and exceptions.
 
 ## Prerequisites
 - Python 3.6 or higher
@@ -24,7 +29,14 @@ pip install -r requirements.txt
 1. Install MySQL on your system and ensure it is running.
 2. Log in to MySQL and create a database:
     CREATE DATABASE bus_reservation;
-3. Create the necessary table for reservations:
+3. Create the necessary table for buses and reservations:
+    CREATE TABLE buses (
+        bus_no INT PRIMARY KEY,
+        route VARCHAR(100),
+        fare INT,
+        departure_time TIME,
+        arrival_time TIME,
+    );
     CREATE TABLE reservations (
         id INT AUTO_INCREMENT PRIMARY KEY,
         bus_no INT,
@@ -45,9 +57,10 @@ pip install -r requirements.txt
 
 ## Project Structure
 
-├── main.py                     # Main entry point for the reservation system
+├── app.py                      # Main entry point for the reservation system
 ├── config.py                   # Configuration file for database and bus details
 ├── reservation                 # Reservation module
+│   ├── __init__.py
 │   ├── reservation.py          # Reservation logic and ticket generation
 │   ├── db_handler.py           # Database handling and SQL queries
 ├── util                        # Utility functions
