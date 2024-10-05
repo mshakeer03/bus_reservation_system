@@ -1,4 +1,4 @@
-from file_handler import open_bus_file, is_seat_available
+from file_handler import open_bus_file, is_preffered_seat_available
 from config import BUS_INFO
 
 # Make Reservation Logic
@@ -6,7 +6,7 @@ def make_reservation(bus_no, date):
     filename = open_bus_file(bus_no, date)
 
     seat_no = int(input("Enter preferred seat number (1-40): "))
-    while seat_no < 1 or seat_no > 40 or not is_seat_available(bus_no, date, seat_no):
+    while seat_no < 1 or seat_no > 40 or not is_preffered_seat_available(bus_no, date, seat_no):
         print("Invalid seat number or seat already taken. Please try again.")
         seat_no = int(input("Enter preferred seat number (1-40): "))
 

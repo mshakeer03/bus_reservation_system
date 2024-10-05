@@ -9,7 +9,7 @@ def open_bus_file(bus_no, date):
     return filename
 
 # Function to check seat availability
-def is_seat_available(bus_no, date, seat_no):
+def is_preffered_seat_available(bus_no, date, seat_no):
     filename = open_bus_file(bus_no, date)
     with open(filename, 'r') as f:
         lines = f.readlines()[1:]

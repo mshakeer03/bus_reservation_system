@@ -21,6 +21,7 @@ CREATE TABLE reservations (
     age INT,
     reservation_date DATE,
     fare INT,
+    ticket_number INT UNIQUE,
     FOREIGN KEY (bus_no) REFERENCES buses(bus_no)
 );
 
