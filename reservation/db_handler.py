@@ -20,7 +20,7 @@ def insert_reservation(bus_no, seat_no, name, gender, age, reservation_date, far
     conn.close()
 
 # Function to query reservations for a specific bus on a specific date
-def query_reservations(bus_no, reservation_date):
+def query_reservations_sp_sd(bus_no, reservation_date):
     conn = get_db_connection()
     cursor = conn.cursor()
     query = """

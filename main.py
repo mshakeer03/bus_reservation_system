@@ -12,7 +12,7 @@ def main():
         print("  2\tDelhi (DEL) to Nainital (NAI)")
         print("  3\tDelhi (DEL) to Chandigarh (CHA)")
         print("-" * 40)
-        print("\nPlease select one of the below option to proceed:")
+        print("\nPlease select one of the below options to proceed:")
         print("1. Make a Reservation")
         print("2. Query Reservations")
         print("3. Exit")
@@ -22,22 +22,23 @@ def main():
 
         if choice == '1':
             bus_no = int(input("Enter Bus No (1-3): "))
-            bus = BUS_INFO.get(bus_no)
             while bus_no not in BUS_INFO:
                 print("Invalid Bus No. Please enter 1, 2, or 3.")
                 bus_no = int(input("Enter Bus No (1-3): "))
 
-            print("-" * 40)
-            print(f"Route for bus no {bus_no} is : {bus['route']}")
-            print(f"Fare from {bus['route']} is {bus['fare']} Rupees")
-            print(f"Departure Time: {BUS_INFO[bus_no]['depart']}\tArrival Time: {BUS_INFO[bus_no]['arrive']}")
-            print("-" * 40)
+            date = input("Enter date of journey (e.g., 16-Jan-2024): ")
+            is_valid, formatted_date = validate_date(date)
+            while not is_valid:
+                date = input("Enter date of journey (e.g., 16-Jan-2024): ")
+                is_valid, formatted_date = validate_date(date)
 
-            date = input("Enter date of journey (e.g., 16-Jan-2007): ")
-            while not validate_date(date):
-                date = input("Enter date of journey (e.g., 16-Jan-2007): ")
+            route = BUS_INFO[bus_no]['route']
+            fare = BUS_INFO[bus_no]['fare']
+            depart_time = BUS_INFO[bus_no]['depart']
+            arrival_time = BUS_INFO[bus_no]['arrive']
 
-            make_reservation(bus_no, date)
+            # Now, pass the formatted_date (in 'YYYY-MM-DD' format) instead of the original date
+            make_reservation(bus_no, formatted_date, route, fare, depart_time, arrival_time)
 
         elif choice == '2':
             bus_no = int(input("Enter Bus No (1-3): "))
@@ -45,16 +46,18 @@ def main():
                 print("Invalid Bus No. Please enter 1, 2, or 3.")
                 bus_no = int(input("Enter Bus No (1-3): "))
 
-            date = input("Enter date of journey (e.g., 16-Jan-2007): ")
-            while not validate_date(date):
-                date = input("Enter date of journey (e.g., 16-Jan-2007): ")
+            date = input("Enter date of journey (e.g., 16-Jan-2024): ")
+            is_valid, formatted_date = validate_date(date)
+            while not is_valid:
+                date = input("Enter date of journey (e.g., 16-Jan-2024): ")
+                is_valid, formatted_date = validate_date(date)
 
-            query_reservations(bus_no, date)
+            # Use formatted_date (in 'YYYY-MM-DD' format)
+            query_reservations(bus_no, formatted_date)
 
         elif choice == '3':
             print("Exiting the system.")
             break
-
         else:
             print("Invalid choice! Please try again.")
 
