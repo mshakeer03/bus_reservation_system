@@ -30,6 +30,7 @@ pip install -r requirements.txt
 2. Log in to MySQL and create a database:
     CREATE DATABASE bus_reservation;
 3. Create the necessary table for buses and reservations:
+```
     CREATE TABLE buses (
         bus_no INT PRIMARY KEY,
         route VARCHAR(100),
@@ -37,6 +38,9 @@ pip install -r requirements.txt
         departure_time TIME,
         arrival_time TIME,
     );
+```
+
+```
     CREATE TABLE reservations (
         id INT AUTO_INCREMENT PRIMARY KEY,
         bus_no INT,
@@ -49,11 +53,14 @@ pip install -r requirements.txt
         ticket_number INT UNIQUE,
         FOREIGN KEY (bus_no) REFERENCES buses(bus_no)
     );
+```
 4. Edit the config.py file to add your MySQL credentials:
+```
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'your_mysql_username'
     MYSQL_PASSWORD = 'your_mysql_password'
     MYSQL_DATABASE = 'bus_reservation'
+```
 
 ## Project Structure
 
