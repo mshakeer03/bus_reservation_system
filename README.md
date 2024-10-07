@@ -133,7 +133,7 @@ The entire system is designed to be extensible, meaning more features (such as s
 
 ## Usage
 1. Clone the repository to your local machine:
-    git clone https://github.com/yourusername/bus_reservation_system.git
+    git clone https://github.com/mshakeer03/bus_reservation_system.git
     cd bus_reservation_system
 2. Set up a virtual environment (optional but recommended):
     python3 -m venv venv
