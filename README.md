@@ -64,8 +64,11 @@ This Python-based Online Bus Reservation System application is designed with mod
 The application follows a modular architecture where each module has a dedicated function. The main driver program (app.py) manages the overall user interface (CLI-based) and routes the user’s actions (e.g., reservation, query, cancellation) to the respective modules.
 
 **Reservation Module:** Handles all booking-related functionalities like seat selection, passenger details collection, and ticket generation.
+
 **Database Handler Module:** Manages interaction with the MySQL database to store and retrieve reservation details.
+
 **Utility Module:** Contains helper functions like ticket number generation and date validation.
+
 This clear division of tasks makes the application more readable, maintainable, and testable.
 
 ### 2. Features of Python:
