@@ -56,7 +56,7 @@ pip install -r requirements.txt
     MYSQL_DATABASE = 'bus_reservation'
 
 ## Project Structure
-
+```
 ├── app.py                      # Main entry point for the reservation system
 ├── config.py                   # Configuration file for database and bus details
 ├── reservation                 # Reservation module
@@ -68,7 +68,7 @@ pip install -r requirements.txt
 │   ├── utils.py                # Utility functions for ticket number generation, etc.
 ├── requirements.txt            # Python dependencies
 └── README.md                   # Project documentation
-
+```
 ## Usage
 1. Clone the repository to your local machine:
     git clone https://github.com/yourusername/bus_reservation_system.git
